@@ -61,7 +61,13 @@ contract CarDealer {
         carPrice = msg.value / 3;
     }
 
-    // function suspend
+    // seller have the ability to suspend the transaction
+    function suspend() external onlySeller correctStatus(CarStatus.Created) {
+        carStatus = CarStatus.Closed;
+        carSeller.transfer(address(this).balance);
+    }
+
+
     // function purchase
     // function confirmation
     // function refund
